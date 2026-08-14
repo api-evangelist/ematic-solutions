@@ -21,8 +21,11 @@ description: >-
   Experience Cloud, and Braze. The firm also runs social-CRM channels such as WhatsApp, LINE, and
   Zalo and partners with 100+ martech platforms (Mailchimp, Klaviyo, Iterable, Segment, Mixpanel,
   and others). Backed by 500 Global, Ematic operates across Singapore, Malaysia, Indonesia, Vietnam,
-  Thailand, the Philippines, Taiwan, Hong Kong, and beyond. It is a services and consulting company
-  rather than an API producer, and publishes no public developer portal, API documentation, or SDKs.
+  Thailand, the Philippines, Taiwan, Hong Kong, and beyond. Alongside the consultancy Ematic operates
+  its own marketing platform (platform.ematicsolutions.com) with the Hi-iQ, Bye-iQ and Retry-iQ
+  products, and it publishes a public developer surface at kb.ematicsolutions.com covering the
+  Ematic.js browser tracker, e-commerce plugins for Magento, Shopify, Haravan and PrestaShop, and a
+  RESTful Core API (beta) for product-event logging and ESP list subscription management.
 url: https://raw.githubusercontent.com/api-evangelist/ematic-solutions/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -32,7 +35,7 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-19'
+modified: '2026-08-13'
 tags:
 - Company
 - Marketing
@@ -45,7 +48,29 @@ tags:
 - Analytics
 - Consulting
 - Asia Pacific
-apis: []
+apis:
+- aid: ematic-solutions-core-api
+  name: Ematic Solutions Core API
+  description: >-
+    The Ematic Solutions Core API is a RESTful, JSON-only web service (labelled "beta" by Ematic) that
+    lets an e-commerce site record product events — browse, cart, checkout and conversion — plus batch
+    event loads, and add or remove email addresses from a connected ESP list. It is the
+    technology-independent server-side counterpart to the Ematic.js browser tracker and exists mainly
+    to integrate Retry-iQ with e-commerce platforms. Client accounts are sharded across data centers,
+    so the host is derived from the suffix of the account's Ematic API key.
+  humanURL: https://kb.ematicsolutions.com/restful-api/core-api.html
+  baseURL: https://{dc}-api.ematicsolutions.com:8084/v2
+  tags:
+  - E-Commerce
+  - Event Tracking
+  - Email Marketing
+  - Subscriptions
+  - Marketing Automation
+  properties:
+  - type: Documentation
+    url: https://kb.ematicsolutions.com/restful-api/developer-guide.html
+  - type: APIReference
+    url: https://kb.ematicsolutions.com/restful-api/core-api.html
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -54,14 +79,67 @@ maintainers:
 common:
 - type: Website
   url: https://ematicsolutions.com
+- type: DeveloperPortal
+  url: https://kb.ematicsolutions.com/
+- type: Documentation
+  url: https://kb.ematicsolutions.com/
+- type: APIReference
+  url: https://kb.ematicsolutions.com/restful-api/core-api.html
+- type: GettingStarted
+  url: https://kb.ematicsolutions.com/quick-start/initializing-ematic-js.html
 - type: Blog
   url: https://www.ematicsolutions.com/blog/
 - type: Support
   url: https://www.ematicsolutions.com/contact/
 - type: PrivacyPolicy
   url: https://www.ematicsolutions.com/privacy-and-data-protection-policy/
+- type: Login
+  url: https://platform.ematicsolutions.com/
+- type: Integrations
+  url: https://www.ematicsolutions.com/partners/
+- type: LinkedIn
+  url: https://www.linkedin.com/company/ematic-solutions
+- type: Authentication
+  url: authentication/ematic-solutions-authentication.yml
+- type: Conventions
+  url: conventions/ematic-solutions-conventions.yml
+- type: ErrorCatalog
+  url: errors/ematic-solutions-problem-types.yml
+- type: DataModel
+  url: data-model/ematic-solutions-data-model.yml
+- type: Lifecycle
+  url: lifecycle/ematic-solutions-lifecycle.yml
+- type: RateLimits
+  url: rate-limits/ematic-solutions-rate-limits.yml
+- type: Plans
+  url: plans/ematic-solutions-plans-pricing.yml
+- type: Packages
+  url: packages/ematic-solutions-packages.yml
+- type: SDKs
+  url: packages/ematic-solutions-packages.yml
+- type: Components
+  url: components/ematic-solutions-components.yml
+- type: Conformance
+  url: conformance/ematic-solutions-conformance.yml
+- type: MCPServer
+  url: mcp/ematic-solutions-mcp.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: LLMsTxt
+  url: llms/ematic-solutions-llms.txt
+- type: DomainSecurity
+  url: security/ematic-solutions-domain-security.yml
 x-enrichment:
-  date: '2026-07-19'
-  status: backfilled
+  date: '2026-08-13'
+  status: enriched
+  artifacts_added: 17
   pass: local-v1
-  note: backfilled from .gitignore signal + verified work evidence
+  note: >-
+    Prior rounds recorded this company as "a services and consulting company rather than an API
+    producer" with no developer portal. That was wrong. STEP 0b contract discovery found a public
+    developer knowledge base at kb.ematicsolutions.com (HTTP 200) carrying a full RESTful Core API
+    reference (7 operations, request bodies, status codes, four-language code samples), a developer
+    guide, the Ematic.js browser tracker and six e-commerce plugin integrations. Ematic publishes NO
+    machine-readable contract — /openapi.json, /openapi.yaml, /swagger.json, /api-docs and /redoc all
+    404 on the api, kb and www hosts — so no openapi/ artifact was written and none was fabricated.
+    Every artifact in this repo is read from Ematic's own published documentation or probed live.
