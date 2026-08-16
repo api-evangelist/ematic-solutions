@@ -9,13 +9,13 @@
       "method": "feed"
     },
     {
-      "source": "https://ematicsolutions.com",
-      "feed_url": "https://www.ematicsolutions.com/feed/",
+      "source": "https://kb.ematicsolutions.com/quick-start/initializing-ematic-js.html",
+      "feed_url": "https://kb.ematicsolutions.com/quick-start/initializing-ematic-js.html",
       "title": "",
       "saved": 0,
-      "method": "discovered"
+      "method": "none"
     }
   ],
   "post_count": 13,
-  "fetched": "2026-08-06T14:08:46Z"
+  "fetched": "2026-08-15T12:22:01Z"
 }
