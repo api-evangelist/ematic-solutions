@@ -1,0 +1,47 @@
+generated: '2026-08-13'
+method: searched
+source: https://kb.ematicsolutions.com/restful-api/core-api.html
+api: Ematic Solutions Core API
+maturity:
+  label: beta
+  evidence: >-
+    The Core API reference titles the surface "Core RESTful API (beta)". Ematic publishes no GA date
+    or stability commitment.
+versioning:
+  scheme: path
+  current: v2
+  path_segment: /v2
+  prior_versions:
+  - version: v1
+    status: still-serving
+    evidence: >-
+      The Ematic.js browser library is loaded from https://api.ematicsolutions.com/v1/ematic.min.js
+      (HTTP 200, 155,724 bytes, application/javascript). No v1 REST surface is documented.
+  policy_published: false
+deprecation:
+  policy_published: false
+  sunset_header: not documented
+  deprecation_header: not documented
+  note: >-
+    No deprecation policy, sunset schedule or RFC 8594 Sunset/Deprecation header support is documented
+    anywhere on kb.ematicsolutions.com. No Deprecation pointer is emitted.
+status_page:
+  published: false
+  probed:
+  - {url: 'https://status.ematicsolutions.com', status: 0, note: 'host does not resolve / no TLS listener'}
+  note: No status page found. No StatusPage pointer is emitted.
+sla:
+  published: false
+changelog:
+  published: false
+  note: >-
+    No dated changelog, release-notes page or version history is published on the knowledge base or
+    the marketing site. No ChangeLog artifact or pointer is emitted.
+support:
+  channel: https://www.ematicsolutions.com/contact/
+  note: >-
+    Support is a sales/contact form on the marketing site. There is no developer support forum, issue
+    tracker, or public community channel.
+observations:
+- The API is served on non-standard TCP port 8084, which is itself an availability risk for consumers behind restrictive egress policies.
+- Access to the API requires an Ematic-issued account key; there is no self-service developer signup.

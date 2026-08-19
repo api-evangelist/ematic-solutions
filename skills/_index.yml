@@ -1,0 +1,17 @@
+generated: '2026-08-13'
+method: generated
+source: https://kb.ematicsolutions.com/restful-api/core-api.html
+api: Ematic Solutions Core API
+note: >-
+  Ematic publishes no AGENTS.md, no skills directory and no machine-readable spec. These skills are
+  generated from the operationIds, paths, request bodies and status codes Ematic publishes verbatim in
+  its Core API reference and developer guide. No operation, field or status code here was invented.
+skills:
+- name: ematic-solutions-retry-iq-event-logging
+  file: ematic-solutions-retry-iq-event-logging.md
+  description: Record browse/cart/checkout/conversion product events for Retry-iQ via the Core API.
+  operations: [logBrowse, logCart, logCheckout, logConversion, logBatchMode]
+- name: ematic-solutions-esp-list-subscriptions
+  file: ematic-solutions-esp-list-subscriptions.md
+  description: Subscribe and unsubscribe email addresses on the connected ESP list, with consent rules.
+  operations: [createSubscription, cancelSubscription]

@@ -1,0 +1,53 @@
+generated: '2026-08-13'
+method: searched
+source: https://kb.ematicsolutions.com/restful-api/core-api.html
+api: Ematic Solutions Core API
+format: custom-json
+rfc9457: false
+envelope:
+  shape: '{"message": "<string>"}'
+  content_type: application/json
+  extensions: [esp_code, mandrill_code]
+  note: >-
+    Ematic does not use application/problem+json. Every documented failure returns a flat JSON object
+    whose only guaranteed member is "message"; subscription failures may add an upstream ESP or
+    Mandrill code.
+problem_types:
+- status: 400
+  title: Bad Request
+  description: bad request
+  body: '{"message": "<string>"}'
+  operations: [logCart, logBrowse, logCheckout, logConversion, logBatchMode, createSubscription, cancelSubscription]
+  remediation: >-
+    Verify the JSON body against the reference. The most common cause is omitting BOTH uuid and email
+    (at least one is required), or omitting a required product field.
+- status: 401
+  title: Unauthorized
+  description: unauthorized
+  body: '{"message": "missing apikeys"} or {"message": "invalid apikeys"}'
+  operations: [logCart, logBrowse, logCheckout, logConversion, logBatchMode, createSubscription, cancelSubscription]
+  remediation: >-
+    Send the Authorization header as ematic-apikey=xxx-x,esp-apikey=yyyy with BOTH keys. "missing
+    apikeys" means one or both were absent; "invalid apikeys" means one did not validate. Confirm the
+    request went to the data-center host named by the Ematic key suffix.
+- status: 500
+  title: Internal Server Error
+  description: Error has occured
+  body: '{"message": "<string>", "esp_code": "<string>", "mandrill_code": "<string>"}'
+  operations: [createSubscription, cancelSubscription]
+  remediation: >-
+    The upstream ESP rejected the subscribe/unsubscribe. Read esp_code (and mandrill_code where
+    present) against the ESP''s own error reference; retry is not documented as safe.
+non_error_statuses:
+- status: 200
+  meaning: >-
+    On createSubscription, "Subscription exists" — the address was already subscribed. On
+    cancelSubscription, "User is not subscribed". Both are no-op successes, NOT errors, and a client
+    must not treat 200 as a create.
+- status: 201
+  meaning: Created — event logged, or subscription created (may carry a "coupon" field).
+- status: 204
+  meaning: No Content — successfully unsubscribed.
+gaps:
+- No machine-readable error-code registry is published; only HTTP status plus a free-text message.
+- The message strings themselves are shown as "string" placeholders in the reference for 4xx/5xx.

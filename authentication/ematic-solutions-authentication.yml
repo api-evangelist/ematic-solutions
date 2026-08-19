@@ -1,0 +1,54 @@
+generated: '2026-08-13'
+method: searched
+source: https://kb.ematicsolutions.com/restful-api/developer-guide.html
+docs: https://kb.ematicsolutions.com/restful-api/developer-guide.html
+api: Ematic Solutions Core API
+summary: >-
+  The Core API authenticates with a single HTTP Authorization header that carries TWO keys at once —
+  the Ematic API key issued for the client account, and the API key of the connected ESP (Email
+  Service Provider). Both are required on every request; there is no OAuth, no OpenID Connect and no
+  bearer-token flow. The Ematic API key doubles as the routing key: its suffix names the data center
+  the account lives in and therefore the host the request must be sent to.
+schemes:
+- id: ematic-esp-composite-key
+  type: apiKey
+  in: header
+  name: Authorization
+  format: 'ematic-apikey=<ematic-key>,esp-apikey=<esp-key>'
+  required: true
+  parts:
+  - key: ematic-apikey
+    description: >-
+      Ematic API key generated when the client account is created. Published format is
+      "<hash>-<suffix>", where the suffix identifies the data center (for example "sg1").
+    doubles_as: host-routing
+  - key: esp-apikey
+    description: API key of the connected Email Service Provider account.
+  note: >-
+    This is a non-standard composite key header, not RFC 7235 Basic/Bearer. A client that sends only
+    one of the two keys receives HTTP 401 with body {"message":"missing apikeys"}; a wrong key
+    returns {"message":"invalid apikeys"}.
+oauth: false
+oidc: false
+mtls: false
+scopes: none
+key_management:
+  issuance: >-
+    Issued by Ematic at client-account creation. There is no self-service developer signup or key
+    rotation surface documented in the public knowledge base.
+  rotation: undocumented
+  prefixes:
+  - pattern: '<hash>-<suffix>'
+    example_suffix: sg1
+    meaning: suffix names the data center / host shard
+platform_roles:
+  source: https://kb.ematicsolutions.com/new-to-ematic/access-rights.html
+  note: >-
+    The Ematic platform UI has its own role model (Admin, Email Performance report, Billing, Hi-iQ,
+    Bye-iQ, Retry-iQ) governing human access to platform.ematicsolutions.com. These roles are NOT
+    API scopes and do not constrain Core API keys.
+  roles: [Admin, Email Performance report, Billing, Hi-iQ, Bye-iQ, Retry-iQ]
+gaps:
+- No OAuth 2.0 / OIDC surface; no /.well-known/oauth-authorization-server (probed 404 on every host).
+- No documented key rotation, expiry or revocation procedure.
+- Credentials are placed in a custom-formatted Authorization header rather than a standard scheme.

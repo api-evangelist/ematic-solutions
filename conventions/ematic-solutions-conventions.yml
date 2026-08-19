@@ -1,0 +1,81 @@
+generated: '2026-08-13'
+method: searched
+source: https://kb.ematicsolutions.com/restful-api/developer-guide.html
+api: Ematic Solutions Core API
+auth:
+  style: composite api-key header
+  header: Authorization
+  format: 'ematic-apikey=xxx-x,esp-apikey=yyyy'
+  see: authentication/ematic-solutions-authentication.yml
+media_types:
+  request: application/json
+  response: application/json
+  note: >-
+    "Core API accepts and outputs only JSON format. XML format is not available." The docs recommend
+    sending content-type: application/json on every non-GET request.
+host_routing:
+  style: key-derived shard
+  template: 'https://<suffix>-api.ematicsolutions.com:8084/v2'
+  example: 'https://sg1-api.ematicsolutions.com:8084/v2'
+  derivation: >-
+    Split the Ematic API key on "-"; the trailing segment is the data-center suffix and is substituted
+    into the host template. Clients must resolve their own base URL — there is no single global host
+    and no discovery endpoint.
+  port: 8084
+  note: >-
+    The API is served on non-standard TCP port 8084, which many corporate egress firewalls block. From
+    this probe host, TCP 8084 on sg1-api.ematicsolutions.com did not accept a connection.
+identity:
+  fields: [uuid, email]
+  rule: >-
+    Unique user identification is the caller's responsibility. At least one of uuid (the client's own
+    identifier) or email must be present or the request fails; sending both is recommended.
+client_environment:
+  field: clientEnv
+  required: false
+  purpose: analytics enrichment (device, viewport, locale)
+  fields: [deviceHeight, deviceWidth, viewportHeight, viewportWidth, country, language, currency,
+    device_uid, device_model, device_os_family, device_os_version]
+idempotency:
+  supported: false
+  note: >-
+    No idempotency key, request-deduplication token or replay-safe semantics is documented. Event
+    logging is additive — the docs describe a cart log as a full snapshot of the cart contents rather
+    than a delta, which is a de-facto last-write-wins convention, but it is not an idempotency
+    contract. NO Idempotency pointer is emitted for this provider.
+pagination:
+  supported: false
+  note: The published surface is write-only (POST/DELETE); no collection reads, so no pagination.
+versioning:
+  style: path
+  current: v2
+  in_path: /v2
+  previous: v1 (still serving the Ematic.js browser library at api.ematicsolutions.com/v1/ematic.min.js)
+  see: lifecycle/ematic-solutions-lifecycle.yml
+error_envelope:
+  shape: '{"message": "<string>"}'
+  rfc9457: false
+  extensions:
+  - field: esp_code
+    where: 5xx on subscription operations
+    meaning: upstream ESP error code passed through
+  - field: mandrill_code
+    where: 500 on createSubscription
+    meaning: upstream Mandrill error code passed through
+  - field: coupon
+    where: 201 on createSubscription
+    meaning: coupon issued with a successful subscription
+  see: errors/ematic-solutions-problem-types.yml
+rate_limits:
+  documented: false
+  see: rate-limits/ematic-solutions-rate-limits.yml
+request_tracing:
+  request_id_header: none documented
+batching:
+  supported: true
+  operation: logBatchMode
+  path: POST /log/batch
+consent:
+  note: >-
+    The developer guide states explicitly that adding or removing email addresses from an ESP list
+    "without user's consent is prohibited". This is a contractual obligation on the API consumer.

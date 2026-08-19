@@ -1,0 +1,20 @@
+generated: '2026-08-13'
+method: searched
+source: https://kb.ematicsolutions.com/restful-api/core-api.html
+docs: https://kb.ematicsolutions.com/restful-api/developer-guide.html
+api: Ematic Solutions Core API
+limit_count: 0
+limits: []
+response_headers: []
+status_on_exhaustion: not documented
+retry_after: not documented
+note: >-
+  Ematic publishes no rate limits for the Core API. The developer guide and the Core API reference were
+  read in full (both HTTP 200) and neither states a request quota, a burst allowance, a throttling
+  window, nor any X-RateLimit-*/RateLimit-*/Retry-After response header. The reference's documented
+  status set for every operation is 200/201/204/400/401/500 — 429 does not appear. This is an honest
+  zero, not an unchecked field: an agent calling this API has no published runtime signal telling it
+  when to back off.
+evidence:
+- {url: 'https://kb.ematicsolutions.com/restful-api/core-api.html', status: 200}
+- {url: 'https://kb.ematicsolutions.com/restful-api/developer-guide.html', status: 200}

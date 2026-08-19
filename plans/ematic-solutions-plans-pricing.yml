@@ -1,0 +1,20 @@
+generated: '2026-08-13'
+method: searched
+source: https://www.ematicsolutions.com/
+api: Ematic Solutions Core API
+plan_count: 0
+plans: []
+pricing_page: null
+model: contact-sales
+note: >-
+  Ematic Solutions publishes no pricing page and no plan tiers. /pricing, /plans and /terms all return
+  HTTP 404 on www.ematicsolutions.com, and the page sitemap (page-sitemap.xml, HTTP 200) contains no
+  pricing URL. The company sells consulting engagements and platform access through a contact form
+  (https://www.ematicsolutions.com/contact/), and the platform's own Billing role
+  (kb.ematicsolutions.com/new-to-ematic/access-rights.html) implies paid accounts negotiated
+  off-catalog. The Core API is not separately priced or self-serve: keys are issued when Ematic creates
+  a client account.
+evidence:
+- {url: 'https://www.ematicsolutions.com/pricing', status: 404}
+- {url: 'https://www.ematicsolutions.com/sitemap.xml', status: 200}
+- {url: 'https://www.ematicsolutions.com/contact/', status: 200}

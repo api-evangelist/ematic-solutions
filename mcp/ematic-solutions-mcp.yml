@@ -1,0 +1,58 @@
+generated: '2026-08-13'
+method: derived
+status: candidate
+source: https://kb.ematicsolutions.com/restful-api/core-api.html
+summary: >-
+  Ematic Solutions ships NO MCP server. npm, the MCP registries and Ematic's own knowledge base and
+  marketing site were searched and none names a hosted endpoint or an installable server package. The
+  tools below are a CANDIDATE mapping derived from the seven operations Ematic publishes in its Core
+  API reference — they describe what an MCP server for this API would expose, not anything that exists.
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: api-key
+  verified: derived
+  note: >-
+    mode is none because nobody ships a server. If one were built it would authenticate with the same
+    composite Authorization header the REST API uses (ematic-apikey + esp-apikey) and would have to
+    resolve its own host from the Ematic key suffix.
+tools:
+- name: log_cart
+  rest: {method: POST, path: /log/cart, operationId: logCart}
+  description: Log the current contents of a shopper's cart as a full snapshot.
+  confidence: high
+- name: log_browse
+  rest: {method: POST, path: /log/browse, operationId: logBrowse}
+  description: Log that a shopper viewed one or more product pages.
+  confidence: high
+- name: log_checkout
+  rest: {method: POST, path: /log/checkout, operationId: logCheckout}
+  description: Log that a shopper opened the checkout page.
+  confidence: high
+- name: log_conversion
+  rest: {method: POST, path: /log/conversion, operationId: logConversion}
+  description: Log a completed order.
+  confidence: high
+- name: log_batch
+  rest: {method: POST, path: /log/batch, operationId: logBatchMode}
+  description: Submit multiple product events in one call.
+  confidence: high
+- name: create_subscription
+  rest: {method: POST, path: /subscribe, operationId: createSubscription}
+  description: >-
+    Add an email address to the connected ESP list. CONSENT-GATED — Ematic's developer guide prohibits
+    subscribing an address without the user's consent, so this is not a tool an autonomous agent should
+    call unsupervised.
+  consequence: writes to a third-party ESP list; sends marketing email to a real person
+  confidence: high
+- name: cancel_subscription
+  rest: {method: DELETE, path: /subscribe, operationId: cancelSubscription}
+  description: Remove an email address from the connected ESP list.
+  consequence: destructive against the ESP list
+  confidence: high
+tool_count: 7
+gaps:
+- No MCP server exists, hosted or local.
+- Input schemas above are inherited from the documented request bodies (see data-model/), not from a live tools/list response — there is nothing to introspect.

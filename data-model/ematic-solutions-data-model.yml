@@ -1,0 +1,88 @@
+generated: '2026-08-13'
+method: searched
+source: https://kb.ematicsolutions.com/restful-api/core-api.html
+also: https://kb.ematicsolutions.com/restful-api/developer-guide.html
+api: Ematic Solutions Core API
+note: >-
+  Derived from the request/response bodies published in the Core API reference and developer guide.
+  Ematic publishes no machine-readable schema, so field types are as printed in the docs' example
+  bodies.
+entities:
+- name: log
+  role: request envelope for all product-event operations
+  fields:
+  - {name: uuid, type: string, required: conditional, description: "Client's own unique identifier for the user. At least one of uuid or email is required."}
+  - {name: email, type: string, required: conditional, description: "User's email address. At least one of uuid or email is required."}
+  - {name: clientEnv, type: object, required: false, ref: clientEnv}
+  - {name: products, type: array, required: true, items_ref: product}
+- name: logBatch
+  role: request envelope for POST /log/batch
+  fields:
+  - {name: email, type: string, required: conditional}
+  - {name: clientEnv, type: object, required: false, ref: clientEnv}
+  note: Batch variant of the log envelope; carries multiple events in one call.
+- name: product
+  role: item recorded for every product event
+  fields:
+  - {name: experiment_id, type: integer, required: true, description: "Must be 0."}
+  - {name: client_product_id, type: string, required: true, description: Product ID}
+  - {name: client_category_id, type: string, required: false, description: Product category ID if available}
+  - {name: price, type: string, required: true, description: Formatted product price with currency}
+  - {name: price_number, type: number, required: true, description: Product price in number format}
+  - {name: price_currency, type: string, required: true, description: Three-letter ISO currency code}
+  - {name: name, type: string, required: true}
+  - {name: description, type: string, required: false, description: Up to 255 characters}
+  - {name: brand_name, type: string, required: false}
+  - {name: image_url, type: string, required: false, description: URL to the product image}
+  - {name: link, type: string, required: false, description: URL to the product page}
+  - {name: misc1, type: string, required: false, description: Custom product attribute}
+  - {name: misc2, type: string, required: false, description: Custom product attribute}
+  - {name: misc3, type: string, required: false, description: Custom product attribute}
+- name: clientEnv
+  role: device/locale context recorded for analytics
+  fields:
+  - {name: deviceHeight, type: integer}
+  - {name: deviceWidth, type: integer}
+  - {name: viewportHeight, type: integer}
+  - {name: viewportWidth, type: integer}
+  - {name: country, type: string, description: Country ISO code}
+  - {name: language, type: string, description: Language ISO code}
+  - {name: currency, type: string, description: Currency ISO code}
+  - {name: device_uid, type: string, description: Device UID (mobile only)}
+  - {name: device_model, type: string, description: "Device model, e.g. Galaxy S8 (mobile only)"}
+  - {name: device_os_family, type: string, description: "e.g. Android"}
+  - {name: device_os_version, type: string, description: "e.g. 6.0"}
+- name: subscribe
+  role: request body for POST /subscribe
+  fields:
+  - {name: uuid, type: string, required: conditional}
+  - {name: email, type: string, required: conditional}
+  - {name: subscribe_email_addr, type: string, required: true, description: "Email address to subscribe. Recommended to match the identification email."}
+  - {name: first_name, type: string, required: false}
+  - {name: last_name, type: string, required: false}
+  - {name: clientEnv, type: object, required: false, ref: clientEnv}
+- name: unsubscribe
+  role: request body for DELETE /subscribe
+  fields:
+  - {name: uuid, type: string, required: conditional}
+  - {name: email, type: string, required: conditional}
+  - {name: unsubscribe_email_addr, type: string, required: true}
+  - {name: clientEnv, type: object, required: false, ref: clientEnv}
+relationships:
+- {from: log, to: product, kind: has_many, via: products}
+- {from: log, to: clientEnv, kind: has_one, via: clientEnv}
+- {from: logBatch, to: clientEnv, kind: has_one, via: clientEnv}
+- {from: subscribe, to: clientEnv, kind: has_one, via: clientEnv}
+- {from: unsubscribe, to: clientEnv, kind: has_one, via: clientEnv}
+- {from: product, to: log, kind: belongs_to, via: products}
+identifiers:
+- {field: uuid, owner: api-consumer, note: "The caller mints and owns this identifier; Ematic does not issue it."}
+- {field: client_product_id, owner: api-consumer, note: Caller's own product catalog ID.}
+- {field: client_category_id, owner: api-consumer}
+browser_variant:
+  source: https://kb.ematicsolutions.com/quick-start/data-event-tracking.html
+  note: >-
+    The Ematic.js browser tracker uses a camelCase product shape that differs from the Core API's
+    snake_case one — id, categoryId, transactionId, price, priceNumber, priceCurrency, quantity, name,
+    brandName, desc, imageUrl, link. The two surfaces are NOT field-compatible; the browser shape adds
+    quantity and transactionId and drops experiment_id and misc1-3.

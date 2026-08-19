@@ -1,0 +1,63 @@
+generated: '2026-08-13'
+method: searched
+source: https://kb.ematicsolutions.com/quick-start/initializing-ematic-js.html
+summary: >-
+  Ematic ships exactly one first-party client library — Ematic.js, a browser tracker distributed from
+  its own edge, not from a package registry. npm, PyPI, RubyGems, crates.io, Packagist, jsDelivr and
+  unpkg were all searched for "ematic"; none carries a first-party Ematic package. There is no
+  server-side SDK in any language for the Core API.
+package_count: 1
+packages:
+- language: javascript
+  registry: cdn
+  name: ematic.min.js
+  url: https://api.ematicsolutions.com/v1/ematic.min.js
+  install: >-
+    <script> async loader snippet published in the Quick Start; loads
+    //api.ematicsolutions.com/v1/ematic.min.js and creates the "ematics" tracker object.
+  official: true
+  version: null
+  published: '2021-02-18'
+  size_bytes: 155724
+  http_status: 200
+  content_type: application/javascript
+  note: >-
+    CDN-distributed and UNPINNED — the published URL carries only the API major version (/v1/), never a
+    library version, so a consumer cannot tell which build they are loading and it can change under
+    them without notice. No registry metadata endpoint exists to query. The one dating signal Ematic
+    does emit is the HTTP Last-Modified header on the asset itself: Thu, 18 Feb 2021 10:02:10 GMT
+    (ETag "602e3b22-2604c"). The only first-party client library for this API has therefore not been
+    rebuilt in over five years, while the Core API it fronts is still labelled beta.
+  registries_checked:
+    npm: 404 (registry.npmjs.org/ematic, /ematic.js)
+    jsdelivr: 404 (data.jsdelivr.com/v1/packages/npm/ematic)
+    pypi: 404
+    rubygems: 404
+    packagist: no first-party match in 78 results for "ematic"
+    crates_io: 403 (blocked, no first-party candidate found by search)
+distribution_channels:
+- kind: platform-plugin
+  name: Ematic.js Installer for Shopify
+  url: https://kb.ematicsolutions.com/ecommerce-plugins/ecommerce-plugins-shopify.html
+  official: true
+  version: null
+  published: null
+  note: >-
+    A Shopify app that injects/removes the Ematic.js snippet via theme assets and ScriptTags. Installed
+    by entering the shop address on the docs page rather than from a listed Shopify App Store entry, so
+    no marketplace version or release date is published. version/published recorded null — checked, no
+    dated metadata exists.
+- kind: platform-plugin
+  name: Ematic e-commerce plugins (Magento 1.x, Magento 2.x, Haravan, Haravan VN, PrestaShop 1.6.x)
+  url: https://kb.ematicsolutions.com/
+  official: true
+  version: null
+  published: null
+  note: >-
+    Documented as installable plugins in the knowledge base. Not published to Packagist, the Magento
+    Marketplace or any registry that answers a metadata query, so no version or release date can be
+    read. PrestaShop 1.6.x and Magento 1.x are both long end-of-life host platforms, which dates this
+    plugin family independently of any registry.
+gaps:
+- No server-side SDK (Python/Java/PHP/Go/Ruby/.NET) for the Core API despite the reference publishing HTTP, JavaScript, Python and Java code samples.
+- No versioned, pinnable distribution of Ematic.js — an integrity/supply-chain gap as well as a currency one.

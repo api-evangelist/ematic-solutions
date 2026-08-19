@@ -1,0 +1,71 @@
+generated: '2026-08-13'
+method: derived
+source: https://kb.ematicsolutions.com/restful-api/core-api.html
+note: >-
+  Derived by reading Ematic's published Core API reference and developer guide against cross-cutting
+  API standards. Ematic makes no standards or certification claim anywhere on its public surface, so
+  every entry below is an observed conformance judgment, not a vendor claim. No Compliance pointer is
+  emitted — there are no published certifications.
+standards:
+- id: rest
+  conforms: partial
+  evidence: >-
+    Resource-ish paths (/log/cart, /subscribe) with POST/DELETE and meaningful status codes
+    (200/201/204/400/401/500), but the /log/* family is RPC-shaped (verb-per-path) rather than
+    resource-oriented, and there are no read operations.
+- id: json
+  conforms: true
+  evidence: '"Core API accepts and outputs only JSON format. XML format is not available."'
+- id: rfc9457
+  conforms: false
+  evidence: >-
+    Errors are a flat {"message": "..."} object served as application/json, not
+    application/problem+json. No type/title/status/detail/instance members.
+- id: json:api
+  conforms: false
+  evidence: No JSON:API document structure, media type, or conventions.
+- id: oauth2
+  conforms: false
+  evidence: >-
+    Authentication is a custom composite API-key header
+    (Authorization: ematic-apikey=xxx,esp-apikey=yyyy). /.well-known/oauth-authorization-server
+    returned 404 on all four hosts.
+- id: oidc
+  conforms: false
+  evidence: /.well-known/openid-configuration returned 404 on all four hosts.
+- id: rfc9116
+  conforms: false
+  evidence: /.well-known/security.txt returned 404 on all four hosts.
+- id: rfc8594
+  conforms: false
+  evidence: No Sunset or Deprecation header support and no deprecation policy documented.
+- id: idempotency
+  conforms: false
+  evidence: No idempotency key or replay-safe semantics documented for any write operation.
+- id: pagination
+  conforms: not-applicable
+  evidence: The published surface is write-only; there are no collection reads to paginate.
+- id: rate-limit-headers
+  conforms: false
+  evidence: >-
+    No RateLimit-*/X-RateLimit-*/Retry-After headers documented and no 429 in the published status set.
+- id: openapi
+  conforms: false
+  evidence: >-
+    No machine-readable OpenAPI/Swagger document is published. The Core API reference is a static HTML
+    page (widdershins-style rendering) with per-operation anchors; probes for
+    /openapi.json, /openapi.yaml, /swagger.json, /v1/openapi.json, /api-docs, /docs and /redoc on
+    api.ematicsolutions.com, kb.ematicsolutions.com and www.ematicsolutions.com all returned 404.
+- id: asyncapi
+  conforms: not-applicable
+  evidence: >-
+    Ematic publishes no webhook, event-push or streaming surface. The only event-shaped construct is
+    the in-browser onAfterSubscribe JavaScript callback, which is a client-side hook, not a webhook.
+- id: gdpr-consent
+  conforms: claimed-obligation
+  evidence: >-
+    The developer guide states subscribing or unsubscribing an address "without user's consent is
+    prohibited", placing the consent obligation on the API consumer. Ematic publishes a Privacy and
+    Data Protection Policy at
+    https://www.ematicsolutions.com/privacy-and-data-protection-policy/ but names no certification
+    (SOC 2, ISO 27001, PCI, HIPAA) anywhere on its public site.

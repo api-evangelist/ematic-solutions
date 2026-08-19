@@ -1,0 +1,44 @@
+generated: '2026-08-13'
+method: probed
+source: live HTTP probes of every ematicsolutions.com host in this profile
+summary: >-
+  Every /.well-known/ path was probed on all four hosts Ematic operates — the marketing site, the API
+  edge, the knowledge base and the platform app. All twenty probes returned HTTP 404. Ematic serves no
+  discovery surface at all: no security.txt, no OIDC/OAuth metadata, no api-catalog, no ai-plugin.
+  Recorded as a measured absence. NO WellKnown or SecurityTxt pointer is emitted.
+hit_count: 0
+hosts:
+- host: https://www.ematicsolutions.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+- host: https://api.ematicsolutions.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+- host: https://kb.ematicsolutions.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+- host: https://platform.ematicsolutions.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+agent_card_probe:
+  note: >-
+    /.well-known/agent-card.json and the legacy /.well-known/agent.json were also probed on
+    www.ematicsolutions.com, api.ematicsolutions.com, kb.ematicsolutions.com and
+    platform.ematicsolutions.com. All returned 404. No A2A agent card exists, so no a2a/ artifact and
+    no AgentCard pointer were written.

@@ -1,0 +1,48 @@
+generated: '2026-08-13'
+method: searched
+source: https://kb.ematicsolutions.com/quick-start/initializing-ematic-js.html
+summary: >-
+  Ematic's client-side surface is a single embeddable tracker, Ematic.js, plus the overlay UI it
+  renders for Bye-iQ and the host-platform installers that inject it.
+families:
+- name: Ematic.js tracker
+  loader: ematic.min.js
+  loader_url: https://api.ematicsolutions.com/v1/ematic.min.js
+  global: ematics
+  namespace_var: EmaticsObject
+  init: 'ematics("create", ematicApikey, opt)'
+  init_options: [email, country_iso, currency_iso, language_iso, events]
+  module_support:
+  - amd/requirejs (documented config block with "apikey" and "opt" under config.ematics)
+  - commonjs (module.exports factory present in the built file)
+  - global script tag (async loader snippet)
+  methods:
+  - {call: 'ematics("create", apikey, opt)', purpose: create the tracker object}
+  - {call: 'ematics("set", "email", "<email>")', purpose: attach the logged-in user's email}
+  - {call: 'ematics("log", "product", "browse", products)', purpose: log a product browse}
+  - {call: 'ematics("log", "product", "cart", products)', purpose: log a cart snapshot}
+  - {call: 'ematics("log", "product", "checkout", products)', purpose: log a checkout}
+  - {call: 'ematics("log", "product", "convert", products)', purpose: log a conversion}
+  events:
+  - {name: onAfterSubscribe, args: [email], purpose: fires when a visitor subscribes via a Bye-iQ overlay}
+  note: >-
+    The docs stress that the products array is a full SNAPSHOT of the cart on every cart log, not a
+    delta, and that all log calls must come after the tracker object is created.
+- name: Bye-iQ overlays
+  kind: hosted overlay UI
+  rendered_by: ematic.min.js
+  purpose: pre-abandonment / exit-intent subscription overlays rendered on the merchant's site
+  state: cookie-based
+  note: >-
+    Cookies are used to track unique visitors and to limit popup display frequency; the docs instruct
+    testers to clear cookies to re-trigger an overlay.
+- name: Host-platform installers
+  kind: plugin/app
+  members:
+  - {platform: Shopify, url: 'https://kb.ematicsolutions.com/ecommerce-plugins/ecommerce-plugins-shopify.html', mechanism: 'theme asset edits + ScriptTags'}
+  - {platform: Magento 1.x, url: 'https://kb.ematicsolutions.com/ecommerce-plugins/ecommerce-plugins-magento-1-x.html'}
+  - {platform: Magento 2.x, url: 'https://kb.ematicsolutions.com/ecommerce-plugins/ecommerce-plugins-magento-2-x.html'}
+  - {platform: Haravan, url: 'https://kb.ematicsolutions.com/ecommerce-plugins/ecommerce-plugins-haravan.html'}
+  - {platform: Haravan VN, url: 'https://kb.ematicsolutions.com/ecommerce-plugins/ecommerce-plugins-haravan-vn.html'}
+  - {platform: PrestaShop 1.6.x, url: 'https://kb.ematicsolutions.com/ecommerce-plugins/ecommerce-plugins-prestashop.html'}
+  - {platform: Google Tag Manager, url: 'https://kb.ematicsolutions.com/quick-start/integrating-with-gtm.html'}
