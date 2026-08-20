@@ -41,6 +41,18 @@ tags:
 - Marketing
 - Digital Marketing
 - Marketing Technology
+- MarTech
+- Email Marketing
+- CRM
+- E-Commerce
+- Analytics
+- Consulting
+- Asia Pacific
+tags_raw:
+- Company
+- Marketing
+- Digital Marketing
+- Marketing Technology
 - Martech
 - Email Marketing
 - CRM
@@ -61,6 +73,12 @@ apis:
   humanURL: https://kb.ematicsolutions.com/restful-api/core-api.html
   baseURL: https://{dc}-api.ematicsolutions.com:8084/v2
   tags:
+  - E-Commerce
+  - Event Tracking
+  - Email Marketing
+  - Subscription
+  - Marketing Automation
+  tags_raw:
   - E-Commerce
   - Event Tracking
   - Email Marketing
