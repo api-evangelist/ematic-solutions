@@ -27,20 +27,18 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/ematic-solutions.png
 name: Ematic Solutions
-description: >-
-  Ematic Solutions is a digital marketing and marketing-technology consultancy headquartered in
-  Singapore that helps B2C brands across Asia Pacific build integrated, high-ROI digital ecosystems.
-  It combines strategy, implementation, and ongoing optimization across SEO, performance marketing,
-  social media, CRM, conversion-rate optimization, analytics, and e-commerce (Shopify), and it
-  implements and manages enterprise marketing clouds including Salesforce Marketing Cloud, Adobe
-  Experience Cloud, and Braze. The firm also runs social-CRM channels such as WhatsApp, LINE, and
-  Zalo and partners with 100+ martech platforms (Mailchimp, Klaviyo, Iterable, Segment, Mixpanel,
-  and others). Backed by 500 Global, Ematic operates across Singapore, Malaysia, Indonesia, Vietnam,
-  Thailand, the Philippines, Taiwan, Hong Kong, and beyond. Alongside the consultancy Ematic operates
-  its own marketing platform (platform.ematicsolutions.com) with the Hi-iQ, Bye-iQ and Retry-iQ
-  products, and it publishes a public developer surface at kb.ematicsolutions.com covering the
-  Ematic.js browser tracker, e-commerce plugins for Magento, Shopify, Haravan and PrestaShop, and a
-  RESTful Core API (beta) for product-event logging and ESP list subscription management.
+description: Ematic Solutions is a digital marketing and marketing-technology consultancy headquartered
+  in Singapore that helps B2C brands across Asia Pacific build integrated, high-ROI digital ecosystems.
+  It combines strategy, implementation, and ongoing optimization across SEO, performance marketing, social
+  media, CRM, conversion-rate optimization, analytics, and e-commerce (Shopify), and it implements and
+  manages enterprise marketing clouds including Salesforce Marketing Cloud, Adobe Experience Cloud, and
+  Braze. The firm also runs social-CRM channels such as WhatsApp, LINE, and Zalo and partners with 100+
+  martech platforms (Mailchimp, Klaviyo, Iterable, Segment, Mixpanel, and others). Backed by 500 Global,
+  Ematic operates across Singapore, Malaysia, Indonesia, Vietnam, Thailand, the Philippines, Taiwan, Hong
+  Kong, and beyond. Alongside the consultancy Ematic operates its own marketing platform (platform.ematicsolutions.com)
+  with the Hi-iQ, Bye-iQ and Retry-iQ products, and it publishes a public developer surface at kb.ematicsolutions.com
+  covering the Ematic.js browser tracker, e-commerce plugins for Magento, Shopify, Haravan and PrestaShop,
+  and a RESTful Core API (beta) for product-event logging and ESP list subscription management.
 url: https://raw.githubusercontent.com/api-evangelist/ematic-solutions/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -76,15 +74,14 @@ tags_raw:
 - Consulting
 - Asia Pacific
 apis:
-- aid: ematic-solutions-core-api
+- aid: ematic-solutions:ematic-solutions-core-api
   name: Ematic Solutions Core API
-  description: >-
-    The Ematic Solutions Core API is a RESTful, JSON-only web service (labelled "beta" by Ematic) that
-    lets an e-commerce site record product events — browse, cart, checkout and conversion — plus batch
-    event loads, and add or remove email addresses from a connected ESP list. It is the
-    technology-independent server-side counterpart to the Ematic.js browser tracker and exists mainly
-    to integrate Retry-iQ with e-commerce platforms. Client accounts are sharded across data centers,
-    so the host is derived from the suffix of the account's Ematic API key.
+  description: The Ematic Solutions Core API is a RESTful, JSON-only web service (labelled "beta" by Ematic)
+    that lets an e-commerce site record product events — browse, cart, checkout and conversion — plus
+    batch event loads, and add or remove email addresses from a connected ESP list. It is the technology-independent
+    server-side counterpart to the Ematic.js browser tracker and exists mainly to integrate Retry-iQ with
+    e-commerce platforms. Client accounts are sharded across data centers, so the host is derived from
+    the suffix of the account's Ematic API key.
   humanURL: https://kb.ematicsolutions.com/restful-api/core-api.html
   baseURL: https://{dc}-api.ematicsolutions.com:8084/v2
   tags:
@@ -156,7 +153,10 @@ common:
   url: conformance/ematic-solutions-conformance.yml
 - type: X-MCPServerCandidate
   url: mcp/ematic-solutions-mcp.yml
-  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type surfaces with a server that does not exist.'
+  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate
+    — a tool list derived from the published API contracts, not an existing server. The scorer already
+    read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type
+    surfaces with a server that does not exist.'
 - type: AgentSkill
   url: skills/_index.yml
 - type: LLMsTxt
@@ -168,12 +168,11 @@ x-enrichment:
   status: enriched
   artifacts_added: 17
   pass: local-v1
-  note: >-
-    Prior rounds recorded this company as "a services and consulting company rather than an API
-    producer" with no developer portal. That was wrong. STEP 0b contract discovery found a public
-    developer knowledge base at kb.ematicsolutions.com (HTTP 200) carrying a full RESTful Core API
-    reference (7 operations, request bodies, status codes, four-language code samples), a developer
-    guide, the Ematic.js browser tracker and six e-commerce plugin integrations. Ematic publishes NO
-    machine-readable contract — /openapi.json, /openapi.yaml, /swagger.json, /api-docs and /redoc all
-    404 on the api, kb and www hosts — so no openapi/ artifact was written and none was fabricated.
-    Every artifact in this repo is read from Ematic's own published documentation or probed live.
+  note: Prior rounds recorded this company as "a services and consulting company rather than an API producer"
+    with no developer portal. That was wrong. STEP 0b contract discovery found a public developer knowledge
+    base at kb.ematicsolutions.com (HTTP 200) carrying a full RESTful Core API reference (7 operations,
+    request bodies, status codes, four-language code samples), a developer guide, the Ematic.js browser
+    tracker and six e-commerce plugin integrations. Ematic publishes NO machine-readable contract — /openapi.json,
+    /openapi.yaml, /swagger.json, /api-docs and /redoc all 404 on the api, kb and www hosts — so no openapi/
+    artifact was written and none was fabricated. Every artifact in this repo is read from Ematic's own
+    published documentation or probed live.
