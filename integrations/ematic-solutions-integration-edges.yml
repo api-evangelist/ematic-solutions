@@ -1,16 +1,47 @@
 generated: '2026-10-12'
-method: none
+method: searched
 source:
 - https://zapier.com/apps/ematic-solutions/integrations
 - https://n8n.io/integrations/ematic-solutions/
 - https://composio.dev/toolkits/ematic-solutions
 - https://monid.ai/tools/ematic-solutions
 checked:
+- https://api.appexchange.salesforce.com/recommendations/v3/listings?type=consultants&pageSize=50&page=0
+- https://api.finder.partners.aws.a2z.com/search?locale=en&size=20&from=0
+- https://app.hubspot.com/api/chirp-frontend-external/v1/gateway/com.hubspot.marketplace.personalization.rpc.PersonalizationPublicRpc/search?hs_static_app=marketplace-storefront-public-ui&hs_static_app_version=1.13519
 - https://composio.dev/toolkits/ematic-solutions
 - https://monid.ai/tools/ematic-solutions
 - https://n8n.io/integrations/ematic-solutions/
+- https://www.databricks.com/en-partners-assets/data/partner/all/en.json
+- https://www.snowflake.com/content/snowflake-site/global/en/why-snowflake/partners/all-partners/_jcr_content/root/responsivegrid/container/container/filterable_resources.filter.json?offset=0
 - https://zapier.com/apps/ematic-solutions/integrations
 summary: null
 marketplace_apps: []
-edges: []
+edges:
+- partner_name: Salesforce Consulting Partner Program
+  partner: salesforce
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://appexchange.salesforce.com/appxListingDetail?listingId=a0N4V00000FhLJTUA3
+  category: Services partner
+  contract_reference:
+    register: Salesforce AppExchange consultants (recommendations/v3 listings type=consultants)
+    spec_file: null
+    standard: Salesforce consulting partner (AppExchange)
+    role: salesforce-consulting-partner
+    registered_name: Ematic Solutions Pte. Ltd.
+    register_id: a0N4V00000FhLJTUA3
+    partner_tier: Select
+    matched_domain: ematicsolutions.com
+    matched_by: domain
+    identity_source: the register's own website / profile URL for the firm (no lookup)
+    signal_note: listing = participation; certified_products = one entry per designation the program awards the
+      FIRM (lapsed flagged); partner_tier and context are never counted (breadth is not credit)
+    detected_by: sweep-professional-services.py
+    detected: '2026-10-19'
+  detected_by: sweep-professional-services.py
+  first_seen: '2026-10-19'
 templates: []
