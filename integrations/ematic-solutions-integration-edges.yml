@@ -15,6 +15,11 @@ checked:
 - https://www.databricks.com/en-partners-assets/data/partner/all/en.json
 - https://www.snowflake.com/content/snowflake-site/global/en/why-snowflake/partners/all-partners/_jcr_content/root/responsivegrid/container/container/filterable_resources.filter.json?offset=0
 - https://zapier.com/apps/ematic-solutions/integrations
+- https://500.co/api/startups
+- https://500.co/companies
+- https://www.antler.co/portfolio
+- https://www.techstars.com/portfolio
+- https://www.ycombinator.com/companies
 summary: null
 marketplace_apps: []
 edges:
@@ -44,4 +49,31 @@ edges:
     detected: '2026-10-19'
   detected_by: sweep-professional-services.py
   first_seen: '2026-10-19'
+- partner_name: 500 Global
+  partner: 500-global
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://500.co/companies
+  category: accelerator portfolio participation
+  contract_reference:
+    register: 500 Global portfolio (500.co/companies; the page's own JSON 500.co/api/startups)
+    standard: null
+    spec_file: null
+    role: accelerator-portfolio-company
+    registered_name: Ematic Solutions
+    register_id: https://500.co/companies
+    register_country: Singapore
+    register_website: www.ematicsolutions.com
+    matched_domain: ematicsolutions.com
+    matched_by: domain
+    signal_note: 'participation only: the accelerator''s own portfolio register lists the company (cohort / investment);
+      an ownership and participation record, not conformance or certification'
+    detected_by: sweep-accelerator-portfolios.py
+    detected: '2026-10-21'
+    year: '2015'
+  detected_by: sweep-accelerator-portfolios.py
+  first_seen: '2026-10-21'
 templates: []
